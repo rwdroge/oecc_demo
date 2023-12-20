@@ -1,0 +1,106 @@
+version: '3.4'
+
+services:
+       
+  db_mongo:
+    image: mongo:6.0.9
+    command: mongod --port 27020
+    container_name: db_mongo
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.3
+    restart: always
+    ports:
+      - "27020:27020"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dbadmin
+      MONGO_INITDB_ROOT_PASSWORD: ruben.1234
+    volumes:
+      - ./data:/data/db
+
+  oecc_server:
+    image: rdroge/oecc_server:1.3.0
+    container_name: oecc_server
+    hostname: oecc_server
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.4
+    ports:
+      - "8050:8050"
+    environment:
+      WAIT_HOSTS: db_mongo:27020
+      WAIT_TIMEOUT: 480
+
+  db_mttenant:
+    image: rdroge/mtdb_oecc:12.7-1.3.0
+    user: root
+    hostname: db_mttenant
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.5
+    container_name: db_mttenant
+    environment:
+      - OECC_AGENT=/usr/oecc_agent/
+      - DB_BROKER_PORT=37000
+      - DB_MINPORT=4100
+      - DB_MAXPORT=4200
+    ports:
+      - "37000:37000"
+      - "37010:37010"
+      - "14001-14100:14001-14100"
+      - "4100-4200:4100-4200"
+    volumes: 
+    # map local cfg file to cfg file in the image
+      - ./licenses/12.7/progress.cfg:/psc/dlc/progress.cfg
+    depends_on:
+      - oecc_server
+
+  pas_mttenant:
+    image: rdroge/mtpas_oecc:12.6-1.3.0
+    container_name: pas_mttenant
+    hostname: pas_mttenant
+    environment:
+      - OECC_AGENT=/usr/oecc_agent/
+      - PROCFG=/usr/dlc/progress.cfg
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.6
+    ports:
+      - "8220-8223:8220-8223"
+    depends_on:
+      - db_mttenant
+
+  otel_collector:
+    image: otel/opentelemetry-collector:0.91.0
+    container_name: otel_collector
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.7
+    ports:
+      - "4317-4318:4317-4318"
+      - "55679:55679"
+
+networks:
+  oecc_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1   
+
+
+
+
+
+
+ 
+
+
+  
+      
+
+
+    
+
+
+      

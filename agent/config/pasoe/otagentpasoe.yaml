@@ -1,0 +1,23 @@
+exporter:
+  name: "otlp"
+  endpoint: "http://10.5.0.7:4317"
+  protocol: "grpc"
+  connectionretry: 20
+  timeout: 10
+  
+pasInstances:
+  -  pasdir: "/app/pas/prodpas/"
+     passchedule: 30
+     pasconnectionretry: 5
+     pasduration: seconds
+     metricsregex:  
+#  -  pasdir: "C:/OpenEdge/WRK/oepas2"
+#     passchedule: 30
+#     pasconnectionretry: 5
+#     pasduration: seconds
+#     metricsregex:  
+#  -  pasdir: "C:/OpenEdge/WRK/oepas4"
+#     passchedule: 30
+#     pasconnectionretry: 5
+#     pasduration: seconds
+#     metricsregex:

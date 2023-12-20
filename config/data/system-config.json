@@ -1,0 +1,18 @@
+{
+    "loglevel": "debug",
+    "firstTimeSetupDone": true,
+    "helpURLs": {
+        "documentation": "https://docs.progress.com/bundle/openedge-command-center-olh/page/Learn-about-OpenEdge-Command-Center.html",
+        "support": "https://www.progress.com/support/openedge",
+        "community": "https://community.progress.com/s/",
+        "privacy": "https://www.progress.com/legal/privacy-policy",
+        "gettingStartedVideo": "https://www.youtube.com/embed/1PatXs4Mz2I",
+	"faqs": "https://www.progress.com/faqs",
+        "restAPI": {
+            "agents": "https://documentation.progress.com/output/OpenEdge-Command-Center/#tag/Agent",
+            "pasoe": "https://documentation.progress.com/output/OpenEdge-Command-Center/#tag/Progress-Application-Server",
+            "database" : "https://documentation.progress.com/output/OpenEdge-Command-Center/#tag/Database",
+	    "users": "https://documentation.progress.com/output/OpenEdge-Command-Center/#tag/Admin/paths/~1admin~1users/get"
+        }
+    }
+}

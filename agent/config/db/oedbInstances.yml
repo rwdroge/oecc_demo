@@ -1,0 +1,7 @@
+# This file stores the list of databases
+oedbInstances: 
+- dbname: mttenant
+  host: localhost
+  port: 37010
+  user: user1@tenant1
+  password: user1 

@@ -1,0 +1,10 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# license files
+*.cfg
+
+# Sub folders (for now decided to include the data folder which holds the initial MongoDB data)
+
+# Binaries to be left out (tar.gz and response files except for sample)
+*.tar.gz
+*.bin

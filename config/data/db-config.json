@@ -1,0 +1,15 @@
+{
+    "dbHostNameAndPort": "db_mongo:27020",
+    "srvRecord": false,
+    "connectOptions": {
+        "autoIndex": true,
+        "connectTimeoutMS": 10000,
+        "socketTimeoutMS": 45000,
+		"auth": {
+			"user": "dbadmin",
+			"password": "ruben.1234"
+		},
+		"authSource": "admin"
+    },
+	"tls": false
+}

@@ -1,0 +1,21 @@
+FROM rdroge/openedge_db_mttenant:12.7 
+
+USER root
+RUN mkdir /usr/oecc_agent
+
+# response file for the silent install
+
+
+ADD ./binaries/PROGRESS_OECC_AGENT_1.3.0_LNX_64.tar.gz /usr/oecc_agent/
+
+COPY serverInfo.json  /usr/oecc_agent/conf
+COPY config/db/* /usr/oecc_agent/conf
+# COPY config/db/installationsInfo.json /usr/oecc_agent/conf
+COPY license/progress.cfg /psc/dlc
+
+RUN chmod +x /usr/oecc_agent/oeccagent
+# RUN chown openedge:openedge /usr/dlc/progress.cfg
+WORKDIR /usr/oecc_agent
+USER root
+
+CMD ["/bin/sh", "-c", "/deploy/scripts/start-db-server.sh"]

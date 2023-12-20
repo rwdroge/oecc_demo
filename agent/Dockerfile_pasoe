@@ -1,0 +1,18 @@
+FROM rdroge/openedge_pas_mttenant:12.6 
+
+USER root
+RUN mkdir /usr/oecc_agent    
+# adding the installer for OECC agent and an agent key file that refers to OECC Server
+ADD ./binaries/PROGRESS_OECC_AGENT_1.3.0_LNX_64.tar.gz /usr/oecc_agent/
+
+COPY start.sh /app/pas/start.sh
+COPY serverInfo.json  /usr/oecc_agent/conf
+COPY config/pasoe/* /usr/oecc_agent/conf
+COPY license/progress.cfg /usr/dlc
+
+RUN chmod +x /usr/oecc_agent/oeccagent
+# RUN chown openedge:openedge /usr/dlc/progress.cfg
+WORKDIR /usr/oecc_agent
+
+
+CMD ["/bin/sh", "-c", "/app/pas/start.sh"]
