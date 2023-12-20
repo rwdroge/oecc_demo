@@ -3,6 +3,9 @@
 # license files
 *.cfg
 
+# response file that was required when doing a silent install
+response.properties
+
 # Sub folders (for now decided to include the data folder which holds the initial MongoDB data)
 
 # Binaries to be left out (tar.gz and response files except for sample)
