@@ -26,9 +26,9 @@ extensions:
 
 exporters:
   otlp:
-    endpoint: "https://otlp.eu01.nr-data.net:443"
+    endpoint: "<uri_endpoint_with_port>"
     headers:
-      api-key: "eu01xx81b2245d5b839ca9acb3272095FFFFNRAL"
+      api-key: "<enter_api_key>"
   logging:
     verbosity: normal
 
