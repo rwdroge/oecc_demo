@@ -26,9 +26,10 @@ extensions:
 
 exporters:
   otlp:
-    endpoint: "https://otlp.eu01.nr-data.net:443"
+    # I used NewRelic, sending everything to their OpenTel endpoint seems to work
+    endpoint: "<insert_apm_endpoint_uri_and_port_here>"
     headers:
-      api-key: "eu01xx81b2245d5b839ca9acb3272095FFFFNRAL"
+      api-key: "<insert_your_api_key_here>"
   logging:
     verbosity: normal
 
