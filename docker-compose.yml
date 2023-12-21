@@ -79,6 +79,8 @@ services:
     ports:
       - "4317-4318:4317-4318"
       - "55679:55679"
+    volumes:
+      - ./oTelCollector/conf/config.yaml:/etc/otelcol/config.yaml
 
 networks:
   oecc_network:
