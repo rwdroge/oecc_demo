@@ -24,6 +24,16 @@ jobs:
       -
         name: Checkout Everything again
         uses: actions/checkout@v4
+          
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.AZURE_BLOBSFTP_HOST }}
+          username: ${{ secrets.AZURE_BLOBSFTP_USER }}
+          password: ${{ secrets.AZURE_BLOBSFTP_PASSWORD }}
+          port: ${{ secrets.AZURE_BLOBSFTP_PORT }}
+          source: "oecc/PROGRESS_OECC_AGENT*.tar.gz"
+          target: "${{ github.workspace }}/binaries"      
       -
         name: Build and push
         uses: docker/build-push-action@v5
