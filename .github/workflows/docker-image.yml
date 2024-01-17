@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.AZURE_BLOBSFTP_USER }}
           password: ${{ secrets.AZURE_BLOBSFTP_PASSWORD }}
           port: ${{ secrets.AZURE_BLOBSFTP_PORT }}
-          source: "*.*"
+          source: "/oecc/*"
           target: "${{ github.workspace }}/binaries"      
       - name: check contents of directory
         run:
