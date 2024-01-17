@@ -31,7 +31,7 @@ jobs:
           direction: download
           host: ${{ secrets.AZURE_BLOBSFTP_HOST }}
           key: ${{ secrets.AZURE_BLOBSFTP_KEY }}
-          insecure_ignore_fingerprint: true
+          fingerprint: ${{ secrets.AZURE_BLOBSFTP_FINGER }}
           username: ${{ secrets.AZURE_BLOBSFTP_USER }}
           source: /oecc/*
           target: "${{ github.workspace }}/binaries" 
