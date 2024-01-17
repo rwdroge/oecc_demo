@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.AZURE_BLOBSFTP_USER }}
           password: ${{ secrets.AZURE_BLOBSFTP_PASSWORD }}
           port: ${{ secrets.AZURE_BLOBSFTP_PORT }}
-          source: "/oecc/*"
+          source: "/oecc/PROGRESS_OECC_AGENT_1.3.0_LNX_64.tar.gz"
           target: "${{ github.workspace }}/binaries"      
       - name: check contents of directory
         run:
