@@ -26,17 +26,15 @@ jobs:
         uses: actions/checkout@v4
           
       - name: copy file via ssh password
-        uses: appleboy/scp-action@v0.1.7
+        uses: nicklasfrahm/scp-action@main
         with:
+          direction: download
           host: ${{ secrets.AZURE_BLOBSFTP_HOST }}
+          insecure_password: ${{ secrets.AZURE_BLOBSFTP_PASSWORD }}
           username: ${{ secrets.AZURE_BLOBSFTP_USER }}
-          password: ${{ secrets.AZURE_BLOBSFTP_PASSWORD }}
-          port: ${{ secrets.AZURE_BLOBSFTP_PORT }}
-          source: oecc/*
-          target: "${{ github.workspace }}/binaries"      
-      - name: check contents of directory
-        run:
-          ls ${{ github.workspace }}/binaries
+          source: /oecc/*
+          target: "${{ github.workspace }}/binaries" 
+        
       -
         name: Build and push
         uses: docker/build-push-action@v5
