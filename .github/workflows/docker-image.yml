@@ -32,11 +32,11 @@ jobs:
           username: ${{ secrets.AZURE_BLOBSFTP_USER }}
           password: ${{ secrets.AZURE_BLOBSFTP_PASSWORD }}
           port: ${{ secrets.AZURE_BLOBSFTP_PORT }}
-          source: "oecc/*.*"
+          source: "*.*"
           target: "${{ github.workspace }}/binaries"      
-          runs:
-            ls ${{ github.workspace }}/binaries
-          
+      - name: check contents of directory
+        run:
+          ls ${{ github.workspace }}/binaries
       -
         name: Build and push
         uses: docker/build-push-action@v5
