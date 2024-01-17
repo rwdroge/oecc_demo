@@ -30,7 +30,6 @@ jobs:
         with:
           direction: download
           host: ${{ secrets.AZURE_BLOBSFTP_HOST }}
-          fingerprint: 0WNMHmCNJE1YFBpHNeADuT5h+PfJ/jJPtUDHCxCSrO0
           key: ${{ secrets.AZURE_BLOBSFTP_KEY }}
           username: ${{ secrets.AZURE_BLOBSFTP_USER }}
           source: /oecc/*
