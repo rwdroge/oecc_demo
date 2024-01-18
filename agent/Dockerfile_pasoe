@@ -1,4 +1,4 @@
-FROM rdroge/openedge_pas_mttenant:12.6 
+FROM rdroge/openedge_pas_mttenant:12.7.0
 
 USER root
 RUN mkdir /usr/oecc_agent    
