@@ -42,7 +42,7 @@ jobs:
           insecure_password: tbPCxLnhv6oqX2nZ2/SmMzl8O2DKE3qu
           insecure_ignore_fingerprint: true
           username: smbsharemv.ruben.ruben
-          source: /oecc/*
+          source: oecc/PROGRESS_OECC_AGENT_1.3.0_LNX_64.tar.gz
           target: "${{ github.workspace }}/binaries" 
         
       -
