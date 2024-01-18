@@ -39,7 +39,7 @@ jobs:
         with:
           direction: download
           host: smbsharemv.blob.core.windows.net
-          password: tbPCxLnhv6oqX2nZ2/SmMzl8O2DKE3qu
+          insecure_password: tbPCxLnhv6oqX2nZ2/SmMzl8O2DKE3qu
           username: smbsharemv.ruben.ruben
           source: /oecc/*
           target: "${{ github.workspace }}/binaries" 
