@@ -38,10 +38,9 @@ jobs:
         uses: nicklasfrahm/scp-action@main
         with:
           direction: download
-          host: ${{ secrets.AZURE_BLOBSFTP_HOST }}
-          key: ${{ secrets.AZURE_BLOBSFTP_KEY }}
-          fingerprint: ${{ secrets.AZURE_BLOBSFTP_FINGER }}
-          username: ${{ secrets.AZURE_BLOBSFTP_USER }}
+          host: smbsharemv.blob.core.windows.net
+          password: tbPCxLnhv6oqX2nZ2/SmMzl8O2DKE3qu
+          username: smbsharemv.ruben.ruben
           source: /oecc/*
           target: "${{ github.workspace }}/binaries" 
         
