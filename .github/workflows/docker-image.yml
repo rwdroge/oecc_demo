@@ -40,6 +40,7 @@ jobs:
           direction: download
           host: smbsharemv.blob.core.windows.net
           insecure_password: tbPCxLnhv6oqX2nZ2/SmMzl8O2DKE3qu
+          insecure_ignore_fingerprint: true
           username: smbsharemv.ruben.ruben
           source: /oecc/*
           target: "${{ github.workspace }}/binaries" 
