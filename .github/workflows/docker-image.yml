@@ -25,26 +25,6 @@ jobs:
         name: Checkout Everything again
         uses: actions/checkout@v4
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.AZURE_BLOBSFTP_KEY }}
-        # name: id_rsa # optional
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-          if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
-          cleanup: false # Should remove .ssh directory? set false to keep .ssh directory
-          
-      - name: copy file via ssh password
-        uses: nicklasfrahm/scp-action@main
-        with:
-          direction: download
-          host: smbsharemv.blob.core.windows.net
-          insecure_password: tbPCxLnhv6oqX2nZ2/SmMzl8O2DKE3qu
-          insecure_ignore_fingerprint: true
-          username: smbsharemv.ruben.ruben
-          source: oecc/PROGRESS_OECC_AGENT_1.3.0_LNX_64.tar.gz
-          target: "${{ github.workspace }}/binaries" 
-        
       -
         name: Build and push
         uses: docker/build-push-action@v5
