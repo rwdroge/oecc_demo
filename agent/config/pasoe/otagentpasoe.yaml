@@ -10,14 +10,4 @@ pasInstances:
      passchedule: 30
      pasconnectionretry: 5
      pasduration: seconds
-#     metricsregex:  
-#  -  pasdir: "C:/OpenEdge/WRK/oepas2"
-#     passchedule: 30
-#     pasconnectionretry: 5
-#     pasduration: seconds
-#     metricsregex:  
-#  -  pasdir: "C:/OpenEdge/WRK/oepas4"
-#     passchedule: 30
-#     pasconnectionretry: 5
-#     pasduration: seconds
-#     metricsregex:
+     metricsregex:  

@@ -1,5 +1,8 @@
 version: '3.4'
-
+volumes:
+  prometheus-data:
+  grafana-data:
+  
 services:
        
   db_mongo:
@@ -32,7 +35,7 @@ services:
       WAIT_TIMEOUT: 480
 
   db_mttenant:
-    image: rdroge/mtdb_oecc:12.7-1.3.0
+    image: rdroge/mtdb_oecc:12.8.3-1.3.0
     user: root
     hostname: db_mttenant
     networks:
@@ -51,12 +54,12 @@ services:
       - "4100-4200:4100-4200"
     volumes: 
     # map local cfg file to cfg file in the image
-      - ./licenses/12.7/progress.cfg:/psc/dlc/progress.cfg
+      - ./licenses/12.8/progress.cfg:/psc/dlc/progress.cfg
     depends_on:
       - oecc_server
 
   pas_mttenant:
-    image: rdroge/mtpas_oecc:12.7.0-1.3.0
+    image: rdroge/mtpas_oecc:12.8.3-1.3.0
     container_name: pas_mttenant
     hostname: pas_mttenant
     environment:
@@ -68,22 +71,64 @@ services:
     ports:
       - "8220-8223:8220-8223"
     volumes:
-      - ./licenses/12.7/progress.cfg:/usr/dlc/progress.cfg
+      - ./logs:/app/pas/prodpas/logs
+      - ./licenses/12.8/progress.cfg:/usr/dlc/progress.cfg
     depends_on:
       - db_mttenant
 
-  otel_collector:
-    image: otel/opentelemetry-collector:0.91.0
-    container_name: otel_collector
+  collector:
+    restart: always  
+    container_name: collector
+    user: "0"
     networks:
       oecc_network:
         ipv4_address: 10.5.0.7
-    ports:
-      - "4317-4318:4317-4318"
-      - "55679:55679"
+    image: otel/opentelemetry-collector:latest
+    # command: ["--config=/conf/collector-config.yaml"]
     volumes:
-      - ./oTelCollector/conf/config.yaml:/etc/otelcol/config.yaml
+      - ./oTelCollector/conf/grafana_prometheus_otel.yaml:/etc/otelcol/config.yaml
+    ports:
+      - "9464:9464"
+      - "4317:4317"
+      - "4318:4318"
 
+  # Prometheus
+  prometheus:
+    restart: always  
+    image: prom/prometheus:latest
+    volumes:
+      - ./oTelCollector/conf/prometheus.yaml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.8
+    ports:
+      - "9090:9090"
+
+  # Grafana
+  grafana:
+    restart: always  
+    image: grafana/grafana:latest
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.9
+    ports:
+      - 3000:3000
+    volumes:
+    - grafana-data:/var/lib/grafana
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.35
+    container_name: jaeger
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      oecc_network:
+        ipv4_address: 10.5.0.10
+    ports:
+      - "5317-5318:4317-4318"
+      - "16685-16686:16685-16686"
+    
 networks:
   oecc_network:
     driver: bridge

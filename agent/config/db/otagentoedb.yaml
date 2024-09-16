@@ -5,25 +5,15 @@ exporter:
   connectionretry: 20
   timeout: 10
 
-  
 oedbInstances:
   -  dbname: mttenant
      host: localhost
      port: 37010
      user: sysprogress
      password: sysprogress
-#     metricsregex: 
-#     otherdbconnparams: 
+     metricsregex: 
+     otherdbconnparams: 
      dbconnectionretry: 5
      dbschedule: 30
      dbduration: seconds
-#  -  dbname: testdb2
-#     host: localhost
-#     port: 3111
-#     user: <username>
-#     password: xxx
-#     metricsregex: 
-#     otherdbconnparams: 
-#     dbconnectionretry: 5
-#     dbschedule: 30
-#     dbduration: seconds
+

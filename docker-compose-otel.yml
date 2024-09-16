@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+       
+  otel_collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel_collector
+    ports:
+      - "4317-4318:4317-4318"
+      - "55679:55679"
+    volumes:
+      - ./oTelCollector/conf/config.yaml:/etc/otelcol/config.yaml
+    network_mode: "bridge"
+
+
+
+
+
+
+
+ 
+
+
+  
+      
+
+
+    
+
+
+      

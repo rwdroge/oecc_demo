@@ -1,4 +1,4 @@
-FROM rdroge/openedge_db_mttenant:12.7 
+FROM rdroge/openedge_db_mttenant:12.8.3
 
 USER root
 RUN mkdir /usr/oecc_agent
